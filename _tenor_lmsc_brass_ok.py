@@ -35,9 +35,6 @@ for n in pnums:
     df = df[df['bari'] == '0']
     df = df[df['clrt'] == '0']
     df = df[df['othr'] == '0']
-    df = df[df['trmp'] == '0']
-    df = df[df['trmb'] == '0']
-    df = df[df['otrb'] == '0']
 
     print(df.shape)
     if n == 0:
