@@ -13,7 +13,7 @@ from sklearn.model_selection import train_test_split
 # from pickles_to_pandas import pickles_to_pandas
 
 NUM_LABEL_COLS = 13
-NUM_COMPONENTS = 36
+NUM_COMPONENTS = 44
 TEST_SIZE = 0.20  # of total data
 VALIDATION_SIZE = 0.2  # of training set
 RANDOM_SEED = 0
