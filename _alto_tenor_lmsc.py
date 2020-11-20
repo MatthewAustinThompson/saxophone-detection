@@ -1,7 +1,7 @@
 """
 Import from this file if you're doing stuff with
 
-        TENOR LOG MEL SPECTROGRAM
+        ALTO + TENOR LOG MEL SPECTROGRAM
         COMPRESSED to 96 x 96
 
 C. Cafiero		
@@ -29,8 +29,7 @@ for n in pnums:
 
     # exclude records we want to exclude
     df = df[df['sop'] == '0']
-    df = df[df['alto'] == '0']
-    df = df[df['tora'] == '0']
+    # df = df[df['tora'] == '0']
     df = df[df['bari'] == '0']
     df = df[df['clrt'] == '0']
     df = df[df['othr'] == '0']
@@ -47,13 +46,21 @@ for n in pnums:
 
 
 print("Making labels...")
-target = master['tenr'].to_numpy().ravel()
+# Create target column
+combined = master[['tenr']].to_numpy() + master[['alto']].to_numpy() + master[['tora']].to_numpy()
+combined = combined.astype('int')
+print(combined.shape)
+combined[combined > 0] = 1
+master['tenor/alto'] = combined
+
+target = master[['tenor/alto']].to_numpy().ravel()  # << This is the label
+
 # ^ these are the labels
 
 print(master.shape)
 print("Selecting columns...")
 lmss = master.iloc[:, 1:]
-num_x_cols = lmss.shape[1] - NUM_LABEL_COLS
+num_x_cols = lmss.shape[1] - NUM_LABEL_COLS - 1  # for the col we added
 lmss = lmss.iloc[:, 0:num_x_cols]
 print(lmss.shape)
 
