@@ -1,6 +1,7 @@
 assets
 data
 keras_models
+logs
 old
 venv
 papers
